@@ -1,0 +1,166 @@
+<!DOCTYPE html>
+<html lang="he">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>עדיקאמייקר</title>
+    <meta name="description" content="תרגומן  עברית-עדיקאית רשמי">
+    <meta property="og:title" content="עדיקאמייקר">
+    <meta property="og:description" content="תרגומן  עברית-עדיקאית רשמי">
+    <meta property="og:image" content="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQ29aCB60RGRIvKJ8UfE1Uv-XXT2CXM6e70Vp3-_mSH&s">
+    <style>
+      body {
+    margin: 0;
+    padding: 0;
+    font-family: Alef, sans-serif;
+}
+
+.background-container {
+    position: relative;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    background: url('https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQ29aCB60RGRIvKJ8UfE1Uv-XXT2CXM6e70Vp3-_mSH&s') repeat;
+}
+
+.overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(255, 255, 255, 0.3);
+    backdrop-filter: blur(1px);
+    z-index: 1;
+}
+
+.content-container {
+    background-color: rgba(255, 255, 255, 0.8);
+    padding: 20px;
+    position: relative;
+    z-index: 2;
+}
+
+header {
+    text-align: center;
+}
+
+.actor-image {
+    max-width: 200px;
+    border-radius: 50%;
+}
+
+main {
+    text-align: center;
+    margin: 20px 0;
+    display: flex;
+    flex-direction: column;
+    align-items: center; /* Center the items horizontally */
+}
+
+textarea {
+    width: 90%;
+    max-width: 600px;
+    height: 150px;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    resize: none;
+    direction: rtl;
+    font-family: 'Alef', sans-serif;
+}
+
+button {
+    margin: 10px;
+    padding: 10px 20px;
+    background-color: #007BFF;
+    color: #fff;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+#output-text {
+    margin: 20px 0;
+    direction: rtl;
+    font-family: 'Alef', sans-serif;
+}
+
+footer {
+    text-align: center;
+    background-color: #f0f0f0;
+    padding: 10px;
+    width: 100%;
+    bottom: 0;
+}
+
+copy-btn {
+    /* Add styles to center the button */
+    display: block;
+    margin: 10px auto; /* Center the button horizontally using auto margins */
+    padding: 10px 20px;
+    background-color: #007BFF;
+    color: #fff;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+}
+  </style>
+</head>
+<body>
+    <div class="background-container">
+       <div class="overlay"></div>
+        <div class="content-container">
+            <header>
+                <h1>עדיקאמייקר</h1>
+                <p> תרגומן עברית-עדיקאית רשמי</p>
+                <img class="actor-image" src="https://img.haarets.co.il/bs/0000017f-dbd5-d3ff-a7ff-fbf5b60d0000/db/e9/519d2629e2445eb646c2ccd08812/522495223.jpg?precrop=500,500,x200,y0&height=800&width=800" alt="Adika">
+            </header>
+            <main>
+                <textarea id="input-text" maxlength="800" placeholder="ש'לש'ל טק'סט בע'בר'ית"></textarea>
+                <button onclick="translateText()">תרגם תרגם מהר לא ש'ל'ש'לתי ב'בו'הו'וריים</button>
+                <div id="output-text"></div>
+                  <button onclick="copyToClipboard()" id="copy-btn" style="display: none;">תע'תיקי לק'ל'יפב'ורד ר'יקי</button>
+            </main>
+         
+        </div>
+    </div>
+       <footer>
+כל ה'ז'כויות ש'מ'ור'ות ל elnini0 2023 (c)
+            </footer>
+</body>
+
+  <script>
+        function translateText() {
+            const inputText = document.getElementById('input-text').value;
+            const outputText = document.getElementById('output-text');
+
+            // Function to add apostrophe after guttural letters and others
+            function yigalAdika(text) {
+                // Add apostrophe after guttural letters and ב, ז, ש, ח, ס, מ
+                const gutturalLetters = 'אעהחרבזשחסמ';
+                const regex = new RegExp('([' + gutturalLetters + '])', 'g');
+                const finalText = text.replace(regex, '$1\'');
+                
+                return finalText;
+            }
+
+            const translatedText = yigalAdika(inputText);
+            outputText.innerText = translatedText;
+            const copyBtn = document.getElementById('copy-btn');
+            copyBtn.style.display = 'block';
+        }
+
+        function copyToClipboard() {
+            const outputText = document.getElementById('output-text');
+            const textArea = document.createElement('textarea');
+            textArea.value = outputText.innerText;
+            document.body.appendChild(textArea);
+            textArea.select();
+            document.execCommand('copy');
+            document.body.removeChild(textArea);
+            alert('שולשלבצהלחה');
+        }
+    </script>
+</html>
